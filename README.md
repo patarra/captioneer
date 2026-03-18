@@ -6,6 +6,8 @@
 
 Automatically transcribe, translate and embed subtitles in any video — from the command line.
 
+Powered by [Whisper](https://github.com/openai/whisper) for offline transcription and Google Translate for translation. Give it a video in any language, get back a subtitled video in any other language — no accounts, no cloud, no setup beyond ffmpeg.
+
 ```
 captioneer caption lecture.mp4 --lang es --mode hard
 ```
