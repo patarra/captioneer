@@ -3,7 +3,6 @@
 import json
 import re
 import subprocess
-import sys
 
 from captioneer.ui import console, make_progress
 
@@ -79,5 +78,5 @@ def _run_ffmpeg(cmd: list[str], duration: float) -> None:
 
     proc.wait()
     if proc.returncode != 0:
-        console.print("[red]ffmpeg failed[/]", file=sys.stderr)
+        console.print("[red]ffmpeg failed[/]")
         raise RuntimeError(f"ffmpeg failed with code {proc.returncode}")

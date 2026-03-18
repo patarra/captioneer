@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "captioneer"
 version = "0.1.0"
 description = "Transcribe, translate and embed subtitles in videos"
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
 dependencies = [
     "faster-whisper>=1.0.0",
@@ -19,6 +20,9 @@ captioneer = "captioneer.cli:app"
 
 [project.urls]
 Repository = "https://github.com/patarra/captioneer"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
