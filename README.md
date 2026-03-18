@@ -1,5 +1,7 @@
 # captioneer
 
+![captioneer](assets/logo.svg)
+
 Automatically transcribe, translate and embed subtitles in any video — from the command line.
 
 ```
@@ -27,8 +29,7 @@ sudo emerge --ask media-video/ffmpeg     # Gentoo
 ## Installation
 
 ```bash
-uv add captioneer
-# or: pip install captioneer
+uv tool install captioneer
 ```
 
 ## Usage
