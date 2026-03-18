@@ -1,5 +1,7 @@
 <div align="center">
   <img src="assets/logo.svg" alt="captioneer" />
+
+  [![CI](https://github.com/patarra/captioneer/actions/workflows/ci.yml/badge.svg)](https://github.com/patarra/captioneer/actions/workflows/ci.yml)
 </div>
 
 Automatically transcribe, translate and embed subtitles in any video — from the command line.
@@ -111,6 +113,12 @@ captioneer burn video.mp4 subtitles.es.srt --mode soft
 captioneer burn video.mp4 subtitles.es.srt --mode hard
 # → video.hard.mp4
 ```
+
+---
+
+## Translation
+
+captioneer uses Google Translate (free, no API key needed) via [deep-translator](https://github.com/nidhaloff/deep-translator). It works well for most use cases but has rate limits — if you're processing many long videos in a row you may hit temporary blocks. Waiting a few minutes is usually enough to recover.
 
 ---
 
