@@ -1,6 +1,6 @@
-# captioneer
-
-![captioneer](assets/logo.svg)
+<div align="center">
+  <img src="assets/logo.svg" alt="captioneer" />
+</div>
 
 Automatically transcribe, translate and embed subtitles in any video — from the command line.
 
@@ -14,12 +14,14 @@ captioneer caption lecture.mp4 --lang es --mode hard
 - [ffmpeg](https://ffmpeg.org/)
 
 **macOS**
+
 ```bash
 brew install ffmpeg        # Homebrew
 port install ffmpeg        # MacPorts
 ```
 
 **Linux**
+
 ```bash
 sudo apt install ffmpeg                  # Ubuntu / Debian
 sudo pacman -S ffmpeg                    # Arch
@@ -44,15 +46,15 @@ Output: `video.es.soft.mkv` with selectable Spanish subtitles.
 
 **Options:**
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--lang` / `-l` | `es` | Target language code (`es`, `fr`, `de`, `ja`…) |
-| `--mode` | `soft` | `soft` — selectable track (MKV) · `hard` — burned-in (MP4, works on iPhone) |
-| `--model` / `-m` | `small` | Whisper model size: `tiny` `base` `small` `medium` `large-v3` |
-| `--source-lang` / `-s` | `auto` | Source language, or `auto` to detect automatically |
-| `--output` / `-o` | auto | Custom output path |
-| `--keep-srt` | off | Keep the intermediate SRT file |
-| `--verbose` / `-v` | off | Print each segment as it's processed |
+| Option                 | Default | Description                                                                 |
+| ---------------------- | ------- | --------------------------------------------------------------------------- |
+| `--lang` / `-l`        | `es`    | Target language code (`es`, `fr`, `de`, `ja`…)                              |
+| `--mode`               | `soft`  | `soft` — selectable track (MKV) · `hard` — burned-in (MP4, works on iPhone) |
+| `--model` / `-m`       | `small` | Whisper model size: `tiny` `base` `small` `medium` `large-v3`               |
+| `--source-lang` / `-s` | `auto`  | Source language, or `auto` to detect automatically                          |
+| `--output` / `-o`      | auto    | Custom output path                                                          |
+| `--keep-srt`           | off     | Keep the intermediate SRT file                                              |
+| `--verbose` / `-v`     | off     | Print each segment as it's processed                                        |
 
 **Examples:**
 
@@ -69,8 +71,8 @@ captioneer caption video.mp4 --lang es --keep-srt
 
 **Auto output naming:**
 
-| Mode | Output |
-|------|--------|
+| Mode          | Output              |
+| ------------- | ------------------- |
 | `--mode soft` | `video.es.soft.mkv` |
 | `--mode hard` | `video.es.hard.mp4` |
 
@@ -114,23 +116,23 @@ captioneer burn video.mp4 subtitles.es.srt --mode hard
 
 ## Soft vs Hard subtitles
 
-| | Soft | Hard |
-|---|---|---|
-| Format | MKV | MP4 |
-| Toggle on/off | ✓ | ✗ |
-| iPhone native player | ✗ | ✓ |
-| VLC / Infuse | ✓ | ✓ |
-| Re-encodes video | No (fast) | Yes (slower) |
+|                      | Soft      | Hard         |
+| -------------------- | --------- | ------------ |
+| Format               | MKV       | MP4          |
+| Toggle on/off        | ✓         | ✗            |
+| iPhone native player | ✗         | ✓            |
+| VLC / Infuse         | ✓         | ✓            |
+| Re-encodes video     | No (fast) | Yes (slower) |
 
 ## Whisper model sizes
 
-| Model | Speed | Quality | VRAM |
-|-------|-------|---------|------|
-| `tiny` | fastest | lowest | ~1 GB |
-| `base` | fast | low | ~1 GB |
-| `small` | balanced | good | ~2 GB |
-| `medium` | slow | better | ~5 GB |
-| `large-v3` | slowest | best | ~10 GB |
+| Model      | Speed    | Quality | VRAM   |
+| ---------- | -------- | ------- | ------ |
+| `tiny`     | fastest  | lowest  | ~1 GB  |
+| `base`     | fast     | low     | ~1 GB  |
+| `small`    | balanced | good    | ~2 GB  |
+| `medium`   | slow     | better  | ~5 GB  |
+| `large-v3` | slowest  | best    | ~10 GB |
 
 `small` is the default and works well for most content. Use `large-v3` for difficult audio, strong accents or technical content.
 
