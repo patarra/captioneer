@@ -9,12 +9,26 @@ captioneer caption lecture.mp4 --lang es --mode hard
 ## Requirements
 
 - Python 3.10+
-- [ffmpeg](https://ffmpeg.org/) (`brew install ffmpeg` on macOS)
+- [ffmpeg](https://ffmpeg.org/)
+
+**macOS**
+```bash
+brew install ffmpeg        # Homebrew
+port install ffmpeg        # MacPorts
+```
+
+**Linux**
+```bash
+sudo apt install ffmpeg                  # Ubuntu / Debian
+sudo pacman -S ffmpeg                    # Arch
+sudo emerge --ask media-video/ffmpeg     # Gentoo
+```
 
 ## Installation
 
 ```bash
-pip install git+https://github.com/patarra/captioneer.git
+uv add captioneer
+# or: pip install captioneer
 ```
 
 ## Usage

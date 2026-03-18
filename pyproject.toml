@@ -21,7 +21,7 @@ captioneer = "captioneer.cli:app"
 [project.urls]
 Repository = "https://github.com/patarra/captioneer"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["pytest>=8.0.0"]
 
 [tool.setuptools.packages.find]
