@@ -13,22 +13,26 @@ uv sync
 You'll also need `ffmpeg` and Python 3.10+ installed.
 
 **macOS**
+
 ```bash
 brew install python ffmpeg     # Homebrew
 port install python313 ffmpeg  # MacPorts
 ```
 
 **Ubuntu / Debian**
+
 ```bash
 sudo apt install python3 python3-pip ffmpeg
 ```
 
 **Arch**
+
 ```bash
 sudo pacman -S python ffmpeg
 ```
 
 **Gentoo**
+
 ```bash
 sudo emerge --ask dev-lang/python media-video/ffmpeg
 ```
@@ -74,9 +78,25 @@ src/captioneer/
 - Keep the modules independent — `transcribe`, `translate` and `embed` should not import from each other
 - New CLI options go in `cli.py`; logic goes in the relevant module
 
+## Releasing a new version
+
+Releases are published to PyPI automatically via GitHub Actions when a version tag is pushed. Use the release script:
+
+```bash
+scripts/release.sh 0.2.0
+```
+
+The script will:
+
+1. Check you're on `main` with a clean working tree
+2. Update the version in `pyproject.toml`
+3. Run tests and ruff
+4. Commit, tag, and push — triggering the publish workflow
+
 ## Reporting bugs
 
 Open an issue with:
+
 - The command you ran
 - The error output
 - Your OS and Python version (`python --version`)
