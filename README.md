@@ -120,6 +120,17 @@ captioneer burn video.mp4 subtitles.es.srt --mode hard
 
 captioneer uses Google Translate (free, no API key needed) via [deep-translator](https://github.com/nidhaloff/deep-translator). It works well for most use cases but has rate limits — if you're processing many long videos in a row you may hit temporary blocks. Waiting a few minutes is usually enough to recover.
 
+If you need higher limits, you can use the [Google Cloud Translation API](https://cloud.google.com/translate):
+
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com)
+2. Enable the **Cloud Translation API**
+3. Create a **Service Account** and download the JSON key
+4. Export the credentials before running captioneer:
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/key.json"
+```
+
 ---
 
 ## Soft vs Hard subtitles
