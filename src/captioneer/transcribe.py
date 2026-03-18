@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Transcribe audio from a video file using faster-whisper."""
+
 from faster_whisper import WhisperModel
 
 from captioneer.ui import console, make_progress
@@ -17,7 +18,8 @@ def transcribe_video(
     lang_arg = None if language == "auto" else language
     segments_gen, info = model.transcribe(video_path, language=lang_arg, task="transcribe")
 
-    console.print(f"  [dim]Detected language:[/] [bold]{info.language}[/] [dim](prob {info.language_probability:.2f})[/]")
+    prob = f"{info.language_probability:.2f}"
+    console.print(f"  [dim]Detected language:[/] [bold]{info.language}[/] [dim](prob {prob})[/]")
 
     duration = info.duration or 0.0
     result = []

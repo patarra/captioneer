@@ -45,6 +45,17 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv run pytest
 ```
 
+## Code style
+
+We use [ruff](https://docs.astral.sh/ruff/) for linting and formatting. Before submitting a PR:
+
+```bash
+uv run ruff check .        # check for lint errors
+uv run ruff format .       # auto-format code
+```
+
+CI will fail if either of these produces errors.
+
 ## Project structure
 
 ```

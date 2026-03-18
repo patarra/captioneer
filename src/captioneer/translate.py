@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Translate subtitle segments from one language to another."""
+
 from deep_translator import GoogleTranslator
 
 from captioneer.ui import console, make_progress

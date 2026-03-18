@@ -22,7 +22,13 @@ captioneer = "captioneer.cli:app"
 Repository = "https://github.com/patarra/captioneer"
 
 [dependency-groups]
-dev = ["pytest>=8.0.0"]
+dev = ["pytest>=8.0.0", "ruff>=0.9.0"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # pycodestyle, pyflakes, isort
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,6 +1,6 @@
 """Tests for cli.py — core functions are mocked, CliRunner invokes commands."""
-from pathlib import Path
-from unittest.mock import patch, MagicMock
+
+from unittest.mock import patch
 
 import pytest
 from typer.testing import CliRunner
@@ -11,6 +11,7 @@ runner = CliRunner()
 
 
 # ── fixtures ──────────────────────────────────────────────────────────
+
 
 @pytest.fixture
 def video_file(tmp_path):
@@ -27,6 +28,7 @@ def srt_file(tmp_path):
 
 
 # ── captioneer transcribe ─────────────────────────────────────────────
+
 
 @patch("captioneer.cli.transcribe_video")
 @patch("captioneer.cli.write_srt")
@@ -64,6 +66,7 @@ def test_transcribe_default_output_path(mock_write, mock_transcribe, video_file)
 
 # ── captioneer translate ──────────────────────────────────────────────
 
+
 @patch("captioneer.cli.parse_srt")
 @patch("captioneer.cli.translate_segments")
 @patch("captioneer.cli.write_srt")
@@ -90,6 +93,7 @@ def test_translate_passes_target_lang(mock_write, mock_translate, mock_parse, sr
 
 
 # ── captioneer burn ───────────────────────────────────────────────────
+
 
 @patch("captioneer.cli.embed_subtitles")
 def test_burn_soft_exits_ok(mock_embed, video_file, srt_file):
@@ -125,14 +129,15 @@ def test_burn_hard_output_is_mp4(mock_hard, video_file, srt_file):
 
 # ── captioneer caption ────────────────────────────────────────────────
 
+
 @patch("captioneer.cli.transcribe_video")
 @patch("captioneer.cli.translate_segments")
 @patch("captioneer.cli.write_srt")
 @patch("captioneer.cli.embed_subtitles")
 @patch("pathlib.Path.unlink")
-def test_caption_full_pipeline_exits_ok(mock_unlink, mock_embed, mock_write, mock_translate, mock_transcribe, video_file):
-    mock_transcribe.return_value = ([{"start": 0.0, "end": 1.0, "text": "Hi"}], "en")
-    mock_translate.return_value = [{"start": 0.0, "end": 1.0, "text": "Hola"}]
+def test_caption_full_pipeline_exits_ok(mock_unlink, mock_embed, mock_write, mock_tr, mock_tx, video_file):
+    mock_tx.return_value = ([{"start": 0.0, "end": 1.0, "text": "Hi"}], "en")
+    mock_tr.return_value = [{"start": 0.0, "end": 1.0, "text": "Hola"}]
 
     result = runner.invoke(app, ["caption", str(video_file), "--lang", "es"])
 
@@ -144,9 +149,9 @@ def test_caption_full_pipeline_exits_ok(mock_unlink, mock_embed, mock_write, moc
 @patch("captioneer.cli.write_srt")
 @patch("captioneer.cli.hardcode_subtitles")
 @patch("pathlib.Path.unlink")
-def test_caption_hard_mode_calls_hardcode(mock_unlink, mock_hard, mock_write, mock_translate, mock_transcribe, video_file):
-    mock_transcribe.return_value = ([{"start": 0.0, "end": 1.0, "text": "Hi"}], "en")
-    mock_translate.return_value = [{"start": 0.0, "end": 1.0, "text": "Hola"}]
+def test_caption_hard_mode_calls_hardcode(mock_unlink, mock_hard, mock_write, mock_tr, mock_tx, video_file):
+    mock_tx.return_value = ([{"start": 0.0, "end": 1.0, "text": "Hi"}], "en")
+    mock_tr.return_value = [{"start": 0.0, "end": 1.0, "text": "Hola"}]
 
     result = runner.invoke(app, ["caption", str(video_file), "--lang", "es", "--mode", "hard"])
 

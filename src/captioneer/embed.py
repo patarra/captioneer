@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Embed SRT subtitles into a video using ffmpeg: soft track or hardcoded."""
+
 import json
 import re
 import subprocess
@@ -11,9 +12,13 @@ def get_duration(video_path: str) -> float:
     """Return video duration in seconds using ffprobe."""
     result = subprocess.run(
         [
-            "ffprobe", "-v", "quiet",
-            "-print_format", "json",
-            "-show_entries", "format=duration",
+            "ffprobe",
+            "-v",
+            "quiet",
+            "-print_format",
+            "json",
+            "-show_entries",
+            "format=duration",
             video_path,
         ],
         capture_output=True,
@@ -26,34 +31,53 @@ def get_duration(video_path: str) -> float:
 
 
 def embed_subtitles(
-    video_path: str, srt_path: str, output_path: str,
-    language: str = "spa", duration: float = 0.0,
+    video_path: str,
+    srt_path: str,
+    output_path: str,
+    language: str = "spa",
+    duration: float = 0.0,
 ) -> None:
     """Soft subtitles: pista seleccionable en MKV."""
     cmd = [
-        "ffmpeg", "-y",
-        "-i", video_path,
-        "-i", srt_path,
-        "-c:v", "copy",
-        "-c:a", "copy",
-        "-c:s", "srt",
-        "-metadata:s:s:0", f"language={language}",
-        "-metadata:s:s:0", "title=Español",
-        "-disposition:s:0", "default",
+        "ffmpeg",
+        "-y",
+        "-i",
+        video_path,
+        "-i",
+        srt_path,
+        "-c:v",
+        "copy",
+        "-c:a",
+        "copy",
+        "-c:s",
+        "srt",
+        "-metadata:s:s:0",
+        f"language={language}",
+        "-metadata:s:s:0",
+        "title=Español",
+        "-disposition:s:0",
+        "default",
         output_path,
     ]
     _run_ffmpeg(cmd, duration or get_duration(video_path))
 
 
 def hardcode_subtitles(
-    video_path: str, srt_path: str, output_path: str, duration: float = 0.0,
+    video_path: str,
+    srt_path: str,
+    output_path: str,
+    duration: float = 0.0,
 ) -> None:
     """Hard subtitles: quemados en el stream de vídeo. Output: MP4."""
     cmd = [
-        "ffmpeg", "-y",
-        "-i", video_path,
-        "-vf", f"subtitles={srt_path}",
-        "-c:a", "copy",
+        "ffmpeg",
+        "-y",
+        "-i",
+        video_path,
+        "-vf",
+        f"subtitles={srt_path}",
+        "-c:a",
+        "copy",
         output_path,
     ]
     _run_ffmpeg(cmd, duration or get_duration(video_path))

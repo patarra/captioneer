@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """SRT format utilities: generate and parse subtitle files."""
+
 import re
 
 
@@ -48,11 +49,13 @@ def parse_srt(srt_path: str) -> list[dict]:
         if len(lines) < 3:
             continue
         times = lines[1].split(" --> ")
-        segments.append({
-            "start": _srt_time_to_seconds(times[0].strip()),
-            "end": _srt_time_to_seconds(times[1].strip()),
-            "text": " ".join(lines[2:]),
-        })
+        segments.append(
+            {
+                "start": _srt_time_to_seconds(times[0].strip()),
+                "end": _srt_time_to_seconds(times[1].strip()),
+                "text": " ".join(lines[2:]),
+            }
+        )
     return segments
 
 

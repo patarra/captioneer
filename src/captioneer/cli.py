@@ -7,16 +7,17 @@ captioneer — CLI de subtítulos automáticos.
   captioneer burn video.mp4 subs.srt --mode hard
   captioneer caption video.mp4 --lang es --mode soft
 """
+
 from enum import Enum
 from pathlib import Path
 from typing import Optional
 
 import typer
 
+from captioneer.embed import embed_subtitles, hardcode_subtitles
+from captioneer.srt_utils import parse_srt, write_srt
 from captioneer.transcribe import transcribe_video
 from captioneer.translate import translate_segments
-from captioneer.srt_utils import parse_srt, write_srt
-from captioneer.embed import embed_subtitles, get_duration, hardcode_subtitles
 from captioneer.ui import console, print_done, print_header, print_info, print_step
 
 app = typer.Typer(
@@ -27,11 +28,11 @@ app = typer.Typer(
 
 
 class WhisperModel(str, Enum):
-    tiny   = "tiny"
-    base   = "base"
-    small  = "small"
+    tiny = "tiny"
+    base = "base"
+    small = "small"
     medium = "medium"
-    large  = "large-v3"
+    large = "large-v3"
 
 
 class BurnMode(str, Enum):
@@ -40,6 +41,7 @@ class BurnMode(str, Enum):
 
 
 # ── captioneer transcribe ─────────────────────────────────────────────
+
 
 @app.command()
 def transcribe(
@@ -65,6 +67,7 @@ def transcribe(
 
 # ── captioneer translate ──────────────────────────────────────────────
 
+
 @app.command()
 def translate(
     srt: Path = typer.Argument(..., help="Input SRT file", exists=True),
@@ -87,11 +90,12 @@ def translate(
 
 # ── captioneer burn ───────────────────────────────────────────────────
 
+
 @app.command()
 def burn(
     video: Path = typer.Argument(..., help="Input video file", exists=True),
     srt: Path = typer.Argument(..., help="Input SRT subtitle file", exists=True),
-    mode: BurnMode = typer.Option(BurnMode.soft, "--mode", help="'soft': selectable track (MKV) | 'hard': burned-in (MP4)"),
+    mode: BurnMode = typer.Option(BurnMode.soft, "--mode", help="soft: selectable track (MKV) | hard: burned-in (MP4)"),
     output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output video file"),
 ):
     """Embed subtitles into a video as soft track (MKV) or burned-in (MP4)."""
@@ -115,11 +119,12 @@ def burn(
 
 # ── captioneer caption ────────────────────────────────────────────────
 
+
 @app.command()
 def caption(
     video: Path = typer.Argument(..., help="Input video file", exists=True),
     lang: str = typer.Option("es", "--lang", "-l", help="Target language code (default: es)"),
-    mode: BurnMode = typer.Option(BurnMode.soft, "--mode", help="'soft': selectable track (MKV) | 'hard': burned-in (MP4)"),
+    mode: BurnMode = typer.Option(BurnMode.soft, "--mode", help="soft: selectable track (MKV) | hard: burned-in (MP4)"),
     output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output video file"),
     model: WhisperModel = typer.Option(WhisperModel.small, "--model", "-m", help="Whisper model size"),
     source_lang: str = typer.Option("auto", "--source-lang", "-s", help="Source language code or 'auto' to detect"),
